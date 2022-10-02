@@ -21,33 +21,44 @@ class DrivableMap {
     public DrivableMap() {
         drivable_map = new HashMap<>();
     }
-
-    /* TODO: Write a method named addDrivable that takes a String (the ID)
-     *       and a Drivable object. If the ID string does not appear as a key
-     *       in drivable_map, then add the pair to drivable_map.
-     *       Return true if the Drivable was added to drivable_map.
+    /**
+     * add a drivable item with the given ID to the DrivableMap
+     * @param id    the ID of the item added
+     * @param item  the item added
+     * @return      whether the item has been added
      */
-
-
-
-
-    /* TODO: Write a method named hasFasterThan that takes an int (a speed)
-     *       and returns true iff there is at least one item in drivable_map
-     *       that has a maxSpeed >= the speed given.
-     * You may want to use drivable_map.keys() or drivable_map.values() to
-     * iterate through drivable_map.
+    public boolean addDrivable(String id, Drivable item) {
+        if (!this.drivable_map.containsKey(id)) {
+            this.drivable_map.put(id, item);
+            return true;
+        }
+        return false;
+    }
+    /**
+     * determines if there is at least one item in drivable_map that
+     * has a greater maxSpeed than the speed given
+     * @param speed the speed given
+     * @return      whether an item has a higher maxSpeed than speed
      */
+    public boolean hasFasterThan(int speed) {
+        for (Drivable d : drivable_map.values()) {
+            if (d.getMaxSpeed() >= speed) return true;
+        }
+        return false;
+    }
 
-
-
-
-
-    /* TODO: Write a method named getTradable that takes no arguments and
-     *       returns a List containing all of the Tradable items in
-     *       drivable_map.
+    /**
+     * return a list containing all the Tradable items in drivable_map
+     * @return  the list in question
      */
+    public List getTradable() {
+        List l = new ArrayList<Tradable>();
+        for (Drivable d : drivable_map.values()) {
+            if (d instanceof Tradable) {
+                l.add(d);
+            }
+        }
 
-
-
-    
+        return l;
+    }
 }
